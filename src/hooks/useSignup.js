@@ -13,10 +13,7 @@ export const useSignup = () => {
 
     try {
       //signup user
-      const response = await fireauth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
+      const response = await fireauth.createUserWithEmailAndPassword(email,password);
       if (!response) {
         throw new Error("Could not sign up");
       }
