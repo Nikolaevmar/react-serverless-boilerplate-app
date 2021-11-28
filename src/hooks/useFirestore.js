@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useState } from "react";
-import { firestore } from "../firebase/config";
 
+import { firestore, timestamp } from "../firebase/config";
 let initialState = {
   document: null,
   isPending: false,
@@ -44,12 +44,13 @@ export const useFirestore = (collection) => {
     }
   };
 
-  //add doc boilerplate
+
   const addDocument = async (doc) => {
     dispatch({ type: "IS_PENDING" });
 
     try {
-      const addedDoc = await ref.add(doc);
+      const createdAt = timestamp.fromDate(new Date()) //takes the current date at the time of trying to add this doc and stores it in the variable
+      const addedDoc = await ref.add({...doc, createdAt});
       dispatchIfNotCancelled({ type: "ADDED_DOCUMENT", payload: addedDoc });
     } catch (err) {
       dispatchIfNotCancelled({ type: "ERROR", payload: err.meesage });
