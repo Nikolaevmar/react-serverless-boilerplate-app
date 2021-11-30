@@ -19,6 +19,13 @@ const firestoreReducer = (state, action) => {
         success: true,
         error: null,
       };
+    case "DELETED_DOCUMENT":
+      return{
+        isPending:false,
+        document:null,
+        success:true,
+        error: null
+      }
     case "ERROR":
       return {
         isPending: false,
@@ -58,7 +65,16 @@ export const useFirestore = (collection) => {
   };
 
   //delete doc boilerplate
-  const deleteDocument = async (id) => {};
+  const deleteDocument = async (id) => {
+    dispatch({ type: 'IS_PENDING'})
+
+    try{
+      await ref.doc(id).delete();
+      dispatchIfNotCancelled({type: "DELETED_DOCUMENT"});
+    }catch(err){
+      dispatchIfNotCancelled({type:"ERROR", payload: "Could not delete"});
+    }
+  };
 
   //clean up if the component unmount whilist doing a request
   useEffect(() => {
