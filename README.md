@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/77740117/144046629-6c03d8e0-b2f2-4b05-95e4-dd31c0212758.png)
 # Getting Started with Create React App
 
 Host: https://mybudget-tracker.firebaseapp.com/
