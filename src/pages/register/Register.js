@@ -40,9 +40,9 @@ export default function Login() {
         onChange={(e) => setPass(e.target.value)}
         value={password}
       />
-      {!isPending && <button className="btn">Sign up</button>}
+      {!isPending && <button className="signBtn">Sign up</button>}
       {isPending && (
-        <button className="btn" disabled>
+        <button className="signBtn" disabled>
           Loading...
         </button>
       )}
